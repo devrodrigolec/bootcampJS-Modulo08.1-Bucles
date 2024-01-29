@@ -58,3 +58,33 @@ export const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
 
   return activarProctolo;
 };
+
+/* Apartado 3 */
+/* El pediatra no puede atender hoy a los pacientes, queremos reasignar los pacientes asignados a la especialidad de pediatría a la de medico de familia. */
+
+export const reasignaPacientesAMedicoFamilia = (
+  pacientes: Pacientes[]
+): Pacientes[] => {
+  let pacientesReasignados: Pacientes[] = [];
+
+  for (let i = 0; i < pacientes.length; i++) {
+    if (pacientes[i].especialidad === "Pediatra") {
+      pacientesReasignados = [
+        ...pacientesReasignados,
+        { ...pacientes[i], especialidad: "Medico de familia" },
+      ];
+    }
+  }
+
+  return pacientesReasignados;
+};
+
+
+/* Apartado 4 */
+/* Queremos saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría */ 
+
+export const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
+  const pacientesPediatria = obtenPacientesAsignadosAPediatria(pacientes);
+
+  return pacientesPediatria.length > 0 ? true : false;
+};

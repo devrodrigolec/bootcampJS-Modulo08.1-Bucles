@@ -1,10 +1,14 @@
-import { pacientes } from "./modelo";
+import { Pacientes, pacientes } from "./modelo";
 
 import {
   obtenPacientesAsignadosAPediatria,
   obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios,
-  activarProtocoloUrgencia
+  activarProtocoloUrgencia,
+  reasignaPacientesAMedicoFamilia,
+  HayPacientesDePediatria,
 } from "./motor";
+
+console.log({pacientes});
 
 /* Apartado 1 */
 
@@ -28,4 +32,19 @@ Es decir, crear una función que devuelve true/false dependiendo si se da la con
 
 const protocoloDeUgencia = activarProtocoloUrgencia(pacientes);
 
-console.log({protocoloDeUgencia});
+console.log({ protocoloDeUgencia });
+
+/* Apartado 3 */
+/* El pediatra no puede atender hoy a los pacientes, queremos reasignar los pacientes asignados a la especialidad de pediatría a la de medico de familia. */
+
+const pacientesPediatriaReasignadosAMedicoDeFamilia : Pacientes[] = reasignaPacientesAMedicoFamilia(pacientes);
+
+console.log({pacientesPediatriaReasignadosAMedicoDeFamilia});
+
+
+/* Apartado 4 */
+/* Queremos saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría */
+
+const existePacientesDePediatria = HayPacientesDePediatria(pacientes);
+
+console.log({existePacientesDePediatria})
