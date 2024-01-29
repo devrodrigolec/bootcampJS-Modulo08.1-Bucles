@@ -26,12 +26,13 @@ export const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (
   pacientes: Pacientes[]
 ): Pacientes[] => {
   let nuevaColeccionDePacientes: Pacientes[] = [];
+  const pacientesDePediatria = obtenPacientesAsignadosAPediatria(pacientes);
 
-  for (let i = 0; i < pacientes.length; i++) {
-    if (pacientes[i].especialidad === "Pediatra" && pacientes[i].edad < 10) {
+  for (let i = 0; i < pacientesDePediatria.length; i++) {
+    if ( pacientesDePediatria[i].edad < 10) {
       nuevaColeccionDePacientes = [
         ...nuevaColeccionDePacientes,
-        { ...pacientes[i] },
+        { ...pacientesDePediatria[i] },
       ];
     }
   }
