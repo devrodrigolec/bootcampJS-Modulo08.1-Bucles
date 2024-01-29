@@ -1,4 +1,4 @@
-import { Pacientes, pacientes } from "./modelo";
+import { Pacientes, pacientes } from './modelo';
 
 import {
   obtenPacientesAsignadosAPediatria,
@@ -6,6 +6,7 @@ import {
   activarProtocoloUrgencia,
   reasignaPacientesAMedicoFamilia,
   HayPacientesDePediatria,
+  cuentaPacientesPorEspecialidad,
 } from "./motor";
 
 console.log({pacientes});
@@ -48,3 +49,10 @@ console.log({pacientesPediatriaReasignadosAMedicoDeFamilia});
 const existePacientesDePediatria = HayPacientesDePediatria(pacientes);
 
 console.log({existePacientesDePediatria})
+
+/* Apartado 5 */
+/* Queremos calcular el número total de pacientes que están asignados a la especialidad de Medico de familia, y lo que están asignados a Pediatría y a cardiología */
+
+const numeroPacientesPorEspecialidad = cuentaPacientesPorEspecialidad(pacientes);
+
+console.log({numeroPacientesPorEspecialidad});

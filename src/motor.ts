@@ -1,4 +1,4 @@
-import { Pacientes } from "./modelo";
+import { NumeroPacientesPorEspecialidad, Pacientes } from './modelo';
 
 /* Apartado 1 */
 
@@ -67,24 +67,52 @@ export const reasignaPacientesAMedicoFamilia = (
 ): Pacientes[] => {
   let pacientesReasignados: Pacientes[] = [];
 
-  for (let i = 0; i < pacientes.length; i++) {
-    if (pacientes[i].especialidad === "Pediatra") {
-      pacientesReasignados = [
-        ...pacientesReasignados,
-        { ...pacientes[i], especialidad: "Medico de familia" },
-      ];
-    }
+  const pacientesDePediatria: Pacientes[] =
+    obtenPacientesAsignadosAPediatria(pacientes);
+
+  for (let i = 0; i < pacientesDePediatria.length; i++) {
+    pacientesReasignados = [
+      ...pacientesReasignados,
+      { ...pacientesDePediatria[i], especialidad: "Medico de familia" },
+    ];
   }
 
   return pacientesReasignados;
 };
 
-
 /* Apartado 4 */
-/* Queremos saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría */ 
+/* Queremos saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría */
 
 export const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
   const pacientesPediatria = obtenPacientesAsignadosAPediatria(pacientes);
 
   return pacientesPediatria.length > 0 ? true : false;
 };
+
+/* Apartado 5  */
+
+/* Queremos calcular el número total de pacientes que están asignados a la especialidad de Medico de familia, y lo que están asignados a Pediatría y a cardiología */
+
+export const cuentaPacientesPorEspecialidad = (
+  pacientes: Pacientes[]
+): NumeroPacientesPorEspecialidad => {
+  let numeroPacientesPorEspecialidad : NumeroPacientesPorEspecialidad = {
+    medicoDeFamilia : 0,
+    pediatria: 0,
+    cardiologia: 0
+  }
+
+  for(let i = 0 ; i < pacientes.length; i++) {
+    if(pacientes[i].especialidad === 'Cardiólogo'){
+      numeroPacientesPorEspecialidad.cardiologia ++
+    }
+    if(pacientes[i].especialidad === 'Medico de familia'){
+      numeroPacientesPorEspecialidad.medicoDeFamilia++
+    }
+    if(pacientes[i].especialidad === 'Pediatra'){
+      numeroPacientesPorEspecialidad.pediatria++
+    }
+  }
+  return numeroPacientesPorEspecialidad
+};
+
